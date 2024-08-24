@@ -110,6 +110,12 @@ class CFScraper:
             "WoW Retail": self.scraper.get(
                 f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=517", headers=headers
             ).json()["data"],
+            "WoW Burning Crusade Classic": self.scraper.get(
+                f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=73246", headers=headers
+            ).json()["data"],
+            "WoW Wrath of the Lich King Classic": self.scraper.get(
+                f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=73713", headers=headers
+            ).json()["data"],
             "WoW Classic": self.scraper.get(
                 f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=67408", headers=headers
             ).json()["data"],
@@ -130,10 +136,10 @@ class CFScraper:
                 )
                 continue
             file_name = payload["fileName"].replace(".zip", "")
-            if not file_name.endswith(self.gv_name_scheme_lookup[gv]):
-                file_name = f"{file_name}{self.gv_name_scheme_lookup[gv]}"
             if not any(char.isdigit() for char in file_name):
                 file_name = f"{file_name}-{payload['displayName']}"
+            if not file_name.endswith(self.gv_name_scheme_lookup[gv]):
+                file_name = f"{file_name}{self.gv_name_scheme_lookup[gv]}"
             with open(f"{file_name}.zip", "wb") as f:
                 f.write(response.content)
 
