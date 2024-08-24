@@ -113,12 +113,6 @@ class CFScraper:
             "WoW Classic": self.scraper.get(
                 f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=67408", headers=headers
             ).json()["data"],
-            "WoW Burning Crusade Classic": self.scraper.get(
-                f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=73246", headers=headers
-            ).json()["data"],
-            "WoW Wrath of the Lich King Classic": self.scraper.get(
-                f"https://api.curseforge.com/v1/mods/{mod_id}/files?gameVersionTypeId=73713", headers=headers
-            ).json()["data"],
         }
         curseforge_mapping = {
             k: v[0] if "nolib" not in v[0]["displayName"] else v[1] for k, v in curseforge_mapping.items() if v
