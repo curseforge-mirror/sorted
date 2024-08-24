@@ -139,7 +139,7 @@ class CFScraper:
             if not file_name.endswith(self.gv_name_scheme_lookup[gv]):
                 file_name = f"{file_name}{self.gv_name_scheme_lookup[gv]}"
             if not any(char.isdigit() for char in file_name):
-                file_name = f"{file_name}{payload['displayName']}"
+                file_name = f"{file_name}-{payload['displayName']}"
             with open(f"{file_name}.zip", "wb") as f:
                 f.write(response.content)
 
